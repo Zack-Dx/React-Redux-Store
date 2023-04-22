@@ -1,16 +1,24 @@
 import React, { useEffect, useState } from "react";
+import { useDispatch } from "react-redux"; // To dispatch
+import { addProduct } from "../store/cartSlice";
 
 const Products = () => {
+  const dispatch = useDispatch(); // To get dispatch function
   const [products, setProducts] = useState([]);
   useEffect(() => {
     const fetchProducts = async () => {
       const response = await fetch(`https://fakestoreapi.com/products`);
       const data = await response.json();
-      console.log(data);
-      setProducts(data.reverse());
+      setProducts(data);
     };
     fetchProducts();
   }, []);
+
+  // Add to Cart
+  const handleAddtoCart = (product) => {
+    console.log(product);
+    dispatch(addProduct(product));
+  };
   return (
     <>
       <div className="productsWrapper">
@@ -20,7 +28,14 @@ const Products = () => {
               <img src={product.image} alt={product.title} />
               <h4>{product.title}</h4>
               <h5>{product.price}</h5>
-              <button className="btn">Add to Cart</button>
+              <button
+                className="btn"
+                onClick={() => {
+                  handleAddtoCart(product);
+                }}
+              >
+                Add to Cart
+              </button>
             </div>
           );
         })}
