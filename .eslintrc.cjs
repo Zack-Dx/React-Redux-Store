@@ -1,15 +1,26 @@
 module.exports = {
-  env: { browser: true, es2020: true },
+  parser: "@typescript-eslint/parser",
+  parserOptions: {
+    sourceType: "module",
+    ecmaVersion: 2022,
+  },
+  plugins: ["@typescript-eslint", "jest"],
+  env: {
+    node: true,
+    "jest/globals": true,
+  },
   extends: [
     "eslint:recommended",
-    "plugin:react/recommended",
-    "plugin:react/jsx-runtime",
-    "plugin:react-hooks/recommended",
+    "plugin:@typescript-eslint/recommended",
+    "plugin:jest/recommended",
   ],
-  parserOptions: { ecmaVersion: "latest", sourceType: "module" },
-  settings: { react: { version: "18.2" } },
-  plugins: ["react-refresh"],
   rules: {
-    "react-refresh/only-export-components": "warn",
+    semi: ["error", "always"],
+    quotes: ["error", "single"],
+    "@typescript-eslint/explicit-function-return-type": "error",
+    "@typescript-eslint/explicit-member-accessibility": "error",
+    "jest/expect-expect": "error",
+    "jest/no-test-callback": "error",
+    "jest/prefer-expect-assertions": "error",
   },
 };
