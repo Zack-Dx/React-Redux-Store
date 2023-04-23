@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 const Navbar = () => {
+  // To get Stored Cart Items
   const items = useSelector((state) => {
     return state.cart;
   }); // Return property to subscribe for changes inside that! Now we can use this everywhere in our application just by subscribing and using useSelector Hook
