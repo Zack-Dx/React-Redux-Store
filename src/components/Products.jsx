@@ -1,23 +1,27 @@
 import { useEffect, useState } from "react";
-import { useDispatch } from "react-redux"; // To dispatch
+import { useDispatch, useSelector } from "react-redux"; // To dispatch
 import { addProduct } from "../store/cartSlice";
+import { fetchProducts } from "../store/productSlice";
 
 const Products = () => {
   const dispatch = useDispatch(); // To get dispatch function
-  const [products, setProducts] = useState([]);
+  const { data: products, status } = useSelector((state) => state.product); // To get products
+
   useEffect(() => {
-    const fetchProducts = async () => {
-      const response = await fetch(`https://fakestoreapi.com/products`);
-      const data = await response.json();
-      setProducts(data);
-    };
-    fetchProducts();
+    dispatch(fetchProducts());
+
+    // const fetchProducts = async () => {
+    //   const response = await fetch(`https://fakestoreapi.com/products`);
+    //   const data = await response.json();
+    //   setProducts(data);
+    // };
+    // fetchProducts();
   }, []);
 
   // Add to Cart
   const handleAddtoCart = (product) => {
     console.log(product);
- return    dispatch(addProduct(product));
+    return dispatch(addProduct(product));
   };
   return (
     <>
