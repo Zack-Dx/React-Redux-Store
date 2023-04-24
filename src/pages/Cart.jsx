@@ -6,7 +6,6 @@ const Cart = () => {
   const dispatch = useDispatch();
   // Remove from Cart
   const handleRemoveFromCart = (product) => {
-    console.log(product);
     return dispatch(removeProduct(product));
   };
 
